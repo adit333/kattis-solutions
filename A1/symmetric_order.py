@@ -21,11 +21,21 @@ def symmetric_order(elements):
     for j in range(last, 0, -2):
         result.append(elements[j])
 
-    print(result)
+    for elem in result:
+        print(elem)
 
 
 def main():
-    symmetric_order([1, 2, 3, 4, 5])
+    counter = 1
+    n = int(input())
+    while (n != 0):
+        names = []
+        for i in range(n):
+            names.append(input())
+        print(f'SET {counter}')
+        symmetric_order(names)
+        n = int(input())
+        counter += 1
 
 
 if __name__ == '__main__':
