@@ -23,12 +23,12 @@ def sim(input: str) -> None:
     print(''.join(result))
 
 def main():
-    input_lines = sys.stdin.read().splitlines()
-    num_of_cases = input_lines[0]
-    for input in input_lines[1:]:
-        sim(input)
-    # sim('my ]]name]] is]] steva<en]<n halim]]]]]')
-    # sim('<<hate<<<<loves[steva<en ] cs2040c< and also cs2040c')
+    # input_lines = sys.stdin.read().splitlines()
+    # num_of_cases = input_lines[0]
+    # for input in input_lines[1:]:
+    #     sim(input)
+    sim('my ]]name]] is]] steva<en]<n halim]]]]]')
+    sim('<<hate<<<<loves[steva<en ] cs2040c< and also cs2040c')
 
 if __name__ == '__main__':
     main()
