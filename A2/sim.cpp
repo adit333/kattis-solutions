@@ -18,21 +18,16 @@ int main() {
 
         list<char>::iterator iter = result.begin();
         for (char ch : input) {
-            switch (ch) {
-                case '<':
-                    if (iter != result.begin())
-                        iter = result.erase(--iter);
-                    break;
-                case '[':
-                    iter = result.begin();
-                    break;
-                case ']':
-                    iter = result.end();
-                    break;
-                default:
-                    iter = result.insert(iter, ch);
-                    iter++;
-                    break;
+            if (ch == '<') {
+                if (iter != result.begin())
+                    iter = result.erase(--iter);
+            } else if (ch =='[') {
+                iter = result.begin();
+            } else if (ch == ']') {
+                 iter = result.end();
+            } else {
+                iter = result.insert(iter, ch);
+                iter++;
             }
         }
         for (char ch : result)
