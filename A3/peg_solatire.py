@@ -38,23 +38,26 @@ def do_bfs(visited_states: Set[FrozenSet[Tuple[int]]], queue_of_states: Deque) -
     return min_num_pegs_left, min_moves
 
 def state_after_a_legal_move(pegs_state: Set[Tuple[int]]) -> Set[Tuple[int]]:
-        for row,col in pegs_state:
-            if (row-1,col) in pegs_state and (row-2,col) not in pegs_state and (row-2,col) not in INVALID_POSITIONS:
-                new_pegs_state =  pegs_state - {(row-1,col),(row,col)}
-                new_pegs_state.add((row-2,col))
-                yield new_pegs_state
-            if (row+1,col) in pegs_state and (row+2,col) not in pegs_state and (row+2,col) not in INVALID_POSITIONS:
-                new_pegs_state =  pegs_state - {(row+1,col),(row,col)}
-                new_pegs_state.add((row+2,col))
-                yield new_pegs_state
-            if (row,col-1) in pegs_state and (row,col-2) not in pegs_state and (row,col-2) not in INVALID_POSITIONS:
-                new_pegs_state = pegs_state - {(row,col-1),(row,col)}
-                new_pegs_state.add((row,col-2))
-                yield new_pegs_state
-            if (row,col+1) in pegs_state and (row,col+2) not in pegs_state and (row,col+2) not in INVALID_POSITIONS:
-                new_pegs_state = pegs_state - {(row,col+1),(row,col)}
-                new_pegs_state.add((row,col+2))
-                yield new_pegs_state
+    peg_states_after_a_legal_move = []
+    for row,col in pegs_state:
+        if (row-1,col) in pegs_state and (row-2,col) not in pegs_state and (row-2,col) not in INVALID_POSITIONS:
+            new_pegs_state =  pegs_state - {(row-1,col),(row,col)}
+            new_pegs_state.add((row-2,col))
+            peg_states_after_a_legal_move.append(new_pegs_state)
+        if (row+1,col) in pegs_state and (row+2,col) not in pegs_state and (row+2,col) not in INVALID_POSITIONS:
+            new_pegs_state =  pegs_state - {(row+1,col),(row,col)}
+            new_pegs_state.add((row+2,col))
+            peg_states_after_a_legal_move.append(new_pegs_state)
+        if (row,col-1) in pegs_state and (row,col-2) not in pegs_state and (row,col-2) not in INVALID_POSITIONS:
+            new_pegs_state = pegs_state - {(row,col-1),(row,col)}
+            new_pegs_state.add((row,col-2))
+            peg_states_after_a_legal_move.append(new_pegs_state)
+        if (row,col+1) in pegs_state and (row,col+2) not in pegs_state and (row,col+2) not in INVALID_POSITIONS:
+            new_pegs_state = pegs_state - {(row,col+1),(row,col)}
+            new_pegs_state.add((row,col+2))
+            peg_states_after_a_legal_move.append(new_pegs_state)
+    return peg_states_after_a_legal_move
+        
 
 def main():
     for i in range(int(input())):
