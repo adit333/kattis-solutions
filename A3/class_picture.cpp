@@ -1,5 +1,5 @@
-"""https://ualberta.kattis.com/sessions/zy3te5/problems/classpicture
-"""
+/*https://ualberta.kattis.com/sessions/zy3te5/problems/classpicture
+*/
 
 
 #include <bits/stdc++.h>
