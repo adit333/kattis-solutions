@@ -7,7 +7,9 @@ MAX = 100000
 INF = 1 << 29
 
 def nine_packs(hotdog_packs: List[int], bun_packs: List[int]) -> None:
-    all_possible_hotdog_combinations = [INF] * MAX
+    # Each cell represents the weight, i.e. index 10 represents no. of hotdog packs with weight 10
+    # index 20 = 2 might mean there is one hotdog pack with 20 hotdogs or 2 hotdog packs with weight 10 each.
+    all_possible_hotdog_combinations = [INF] * MAX      
     all_possible_bun_combinations = [INF] * MAX
     all_possible_hotdog_combinations[0] = 0
     all_possible_bun_combinations[0] = 0
