@@ -6,15 +6,16 @@ Use modified Kahn's Algorithm
 import copy
 import sys
 from typing import List
+from collections import deque
 
 
 def brexit(adjacency_list: List[List[int]], original_degree: List[int],
         home: int, first_to_leave: int) -> None:
-    queue = [first_to_leave]       # Contains countries that are set to leave
+    queue = deque([first_to_leave])       # Contains countries that are set to leave
     left_the_block = [False] * len(original_degree)
     current_degree = copy.deepcopy(original_degree)
     while queue:
-        u = queue.pop(0)
+        u = queue.popleft()
         if left_the_block[u]: continue
         if u == home:
             print("leave")
