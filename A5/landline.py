@@ -79,7 +79,7 @@ def landline(num_vertices: int, num_insecure_buildings: int,
     
     if num_edges_taken == num_vertices - 1:
         print(mst_cost)
-    elif num_edges_taken == 0 and num_insecure_buildings == 2:      # TODO: rectify this hack
+    elif num_edges_taken == 0 and num_insecure_buildings == 2:      # TODO: rectify this hack for special case of just 2 insecure buildings
         print(edge_list[0][2])
     else:
         print("impossible")
