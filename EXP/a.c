@@ -43,8 +43,25 @@ int main() {
     memcpy(record2, storage, 13);
     record = (recordInfo_t*)record2;
 
-    // valueRec_t value = {9, "lmnopqrst"};
-    // char *value_string = (char*)&value;
+    int key = 8;
+    valueRec_t val_rec = {3, "abc"};
+    char *val = (char*)&val_rec;
+	valueRec_t *value_record = (valueRec_t *)val;
+	int value_size = 4 + value_record->length;
+    int required_storage = 8 + value_size;
+
+    heapPage_t *heap_page = (heapPage_t *)malloc(sizeof(heapPage_t));
+    heap_page->startOfEmptySpace = 2;
+    heap_page->nextPage = 0;
+	char *empty_space = heap_page->records + heap_page->startOfEmptySpace; // Pointer to start of empty space
+	memcpy(empty_space, &key, 8);		// Copy the key
+	empty_space += 8;					// Advance pointer to now store the (value_len, value)
+	memcpy(empty_space, val, value_size);
+	heap_page->startOfEmptySpace += required_storage;
+
+    char *val2 = (char *)malloc(13);
+    memcpy(val2, empty_space, value_size);
+    value_record = (valueRec_t *)val2;
 
     printf("%d\n", record->key);
 }
