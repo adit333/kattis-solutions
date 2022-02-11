@@ -73,7 +73,7 @@ int main() {
     // it divides k! and (n-k)!
 
     long long ans = 1;
-    for(auto [p, k] : num) ans *= (k - den1[p] - den2[p] + 1);
+    // for(auto [p, k] : num) ans *= (k - den1[p] - den2[p] + 1); // Uncomment this before running
 
     cout << ans << endl;
   }

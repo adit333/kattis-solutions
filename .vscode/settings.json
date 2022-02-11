@@ -18,6 +18,8 @@
         "deque": "cpp",
         "string": "cpp",
         "vector": "cpp",
-        "rope": "cpp"
-    }
+        "rope": "cpp",
+        "iostream": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "Enabled"
 }
