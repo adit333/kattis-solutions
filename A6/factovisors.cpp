@@ -1,4 +1,5 @@
-
+/* https://ualberta.kattis.com/problems/factovisors
+*/
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -38,12 +39,13 @@ int main() {
             }
             if (temp > 1) prime_factors_of_m[temp] = 1;
 
-            for (auto [prime_factor, power] : prime_factors_of_m) {
-                if (legendre(prime_factor, n) < power) {
-                    m_divides_n_fact = false;
-                    break;
-                }
-            }
+            // Uncomment this before running, for some reason vs code thinks this is an error
+            // for (auto [prime_factor, power] : prime_factors_of_m) {
+            //     if (legendre(prime_factor, n) < power) {
+            //         m_divides_n_fact = false;
+            //         break;
+            //     }
+            // }
         }
     if (m_divides_n_fact)
         printf("%d %s %d!\n", m, "divides", n);
