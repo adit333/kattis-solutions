@@ -1,7 +1,12 @@
 """https://ualberta.kattis.com/sessions/of28kb/problems/farey
 Calculate EulerPhi(i) for each i in [1, N]
 Do prefix sum on the array
-Retrun eulerphi_prefix_sum[i] + 1
+Return eulerphi_prefix_sum[i] + 1
+
+EulerPhi(i) tells us the no. of ints relative prime to i that are < i, so we now know the
+number of fractions in the farey sequence with denominator i: it is EulerPhi(i)
+The prefix sum gives us the sum of these numbers, to get total length of farey sequence
+We do +1 to account for 0/1
 """
 
 import sys
