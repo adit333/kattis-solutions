@@ -1,6 +1,7 @@
 """https://ualberta.kattis.com/sessions/hgwror/problems/tomjerry
 
 References: pg 299 CP4 book
+Use inclusing exclusion principle and combinatorics
 """
 
 import sys
@@ -75,7 +76,7 @@ def tom_jerry(width: int, height: int, cheeses: List[Tuple[int, int]]) -> None:
         for subset in subsets_of_cheeses:
             if is_subset_valid(subset):
                 temp = sign * num_of_paths(subset, width, height)
-                temp = mod(temp + p, p)
+                temp = mod(temp + p, p) # to fdeal with the case temp is negative
                 total_paths += temp
                 total_paths = mod(total_paths, p)
         sign *= -1
