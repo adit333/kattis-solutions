@@ -5,38 +5,8 @@
 
 using namespace std;
 
-
-int main() {
-    int num_owners, team_size;
-    cin >> num_owners >> team_size;
-
-    // Read owner preferences
-    vector<vector<string>> owner_preferences(num_owners);
-    for (auto &pref: owner_preferences) {
-        int num_of_preferences;
-        cin >> num_of_preferences;
-        for (int i = 0; i < num_of_preferences; ++i) {
-            string player_name;
-            cin >> player_name;
-            pref.push_back(player_name);
-        }
-        reverse(pref.begin(), pref.end());
-    }
-
-    // Read plyer rankings
-    map<string, int> player_rank_map;
-    map<int, string> available_players;
-
-    int num_of_players;
-    cin >> num_of_players;
-    for (int rank = 0; rank < num_of_players; ++rank) {
-        string player_name;
-        cin >> player_name;
-
-        player_rank_map[player_name] = rank;
-        available_players[rank] = player_name;
-    }
-
+void fantasy_draft(int num_owners, int team_size, vector<vector<string>> &owner_preferences,
+        map<string, int> &player_rank_map, map<int, string> &available_players) {
     // Simulate Fantasy Draft Picks
     vector<vector<string>> selected_players(num_owners);
 
@@ -70,4 +40,37 @@ int main() {
         }
         cout << endl;
     }
+}
+
+int main() {
+    int num_owners, team_size;
+    cin >> num_owners >> team_size;
+
+    // Read owner preferences
+    vector<vector<string>> owner_preferences(num_owners);
+    for (auto &pref: owner_preferences) {
+        int num_of_preferences;
+        cin >> num_of_preferences;
+        for (int i = 0; i < num_of_preferences; ++i) {
+            string player_name;
+            cin >> player_name;
+            pref.push_back(player_name);
+        }
+        reverse(pref.begin(), pref.end());
+    }
+
+    // Read plyer rankings
+    map<string, int> player_rank_map;
+    map<int, string> available_players;
+
+    int num_of_players;
+    cin >> num_of_players;
+    for (int rank = 0; rank < num_of_players; ++rank) {
+        string player_name;
+        cin >> player_name;
+
+        player_rank_map[player_name] = rank;
+        available_players[rank] = player_name;
+    }
+    fantasy_draft(num_owners, team_size, owner_preferences, player_rank_map, available_players);
 }
