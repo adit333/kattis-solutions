@@ -17,8 +17,8 @@ using namespace std;
 
 const int MAX_VID_TYPES = 20;
 int memo[1<<MAX_VID_TYPES];                 // There are max 20 vidoe types, so at most 2^20 subsets of video types
-unordered_map<char, int> video_type_ids;  // Simply id each vidoe type as ints
-
+//unordered_map<char, int> video_type_ids;  // Simply id each vidoe type as ints
+int video_type_ids[256];    // Since the ASCII code for letters can go up to a mazx of 256
 
 
 int min_clicks(int remaining_video_types, string watch_list) {
@@ -62,10 +62,11 @@ int min_clicks(int remaining_video_types, string watch_list) {
 void watch_later(int num_of_vidoes_in_watch_list,
         int num_of_video_types, string watch_list) {
     memset(memo, -1, sizeof(memo));
+    memset(video_type_ids, -1, sizeof(video_type_ids));
 
     int id = 0;
     for (char video_type: watch_list) {
-        if (video_type_ids.find(video_type) == video_type_ids.end())
+        if (video_type_ids[video_type] == -1)
             video_type_ids[video_type] = id++;
     }
     cout << min_clicks((1<<num_of_video_types)-1, watch_list) << endl;
