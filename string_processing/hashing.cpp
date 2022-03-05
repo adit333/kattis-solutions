@@ -36,13 +36,14 @@ int main() {
 
     // compute the polynomial for the various prefixes iteratively
     // (and the various powers of x and inv_x)
-    vector<ulll> poly(1, 0), xp(1, 1), inv_xp(1, 1);
+    vector<ulll> poly(1, 0);    // Stores the hash value, poly[i] is the hash for the substring s[0..i-1]
+    vector<ulll> X_powers(1, 1);      // Stores the powers of X, with X_powers[i] = X^i
+    vector<ulll> inv_X_powers(1, 1); //// Stores the inverse powers of X, with inv_X_powers[i] = X^(-i)
     for (char c : str) {
-        poly.push_back((poly.back() + xp.back()*c) % P);
-        xp.push_back((xp.back() * X) % P);
-        inv_xp.push_back((inv_xp.back() * INV_X) % P);
+        poly.push_back((poly.back() + X_powers.back()*c) % P);
+        X_powers.push_back((X_powers.back() * X) % P);
+        inv_X_powers.push_back((inv_X_powers.back() * INV_X) % P);
     }
-    // now poly[i] is the hash for the substring s[0..i-1]
 
 
     // finally, answer the queries
@@ -52,7 +53,7 @@ int main() {
         cin >> l >> r;
 
         // P is added so the term does not go negative
-        cout << ull(((P + poly[r] - poly[l])*inv_xp[l]) % P) << endl;
+        cout << ull(((poly[r] - poly[l] + P) * inv_X_powers[l]) % P) << endl;
     }
 
     return 0;
