@@ -1,4 +1,12 @@
 """https://ualberta.kattis.com/sessions/vk6fb6/problems/burrowswheeler
+
+We can reduce this problem to a suffix array construction problem using the heuristic of
+letting T = T + T[:-1]. Now, the first n characters of the first n suffixes form the cyclical
+permutations of our original T. Instead of worrying about how to extact only the first n
+suffixes, we just construct a SA as usual and only consider a suffix if it is < n. If so,
+we get the nth character with T[i+n-1] where i is the first index of the suffix.
+
+Time: O(n log n), Space: O(n)
 """
 
 import sys
@@ -59,6 +67,8 @@ def suffix_array_construction(s):
 
 def burrows_wheeler(s: str) -> None:
     n = len(s)
+    # remove the last character to prevent the original string from being
+    # included twice and add terminal char
     s = s + s[:-1] + str(9)
     sa = suffix_array_construction(s)
     
