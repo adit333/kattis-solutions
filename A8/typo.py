@@ -9,7 +9,7 @@ import sys
 from typing import Dict, List
 
 X = 130941      # Just a random number
-X_INV = None
+X_INV = 111699163
 MOD = 10**9+7
 
 
@@ -49,6 +49,8 @@ def typo(words: List[str]) -> None:
     word_to_hash = {}       # Dict of {'word': hash}
     hash_to_words = {}      # Dict of {hash: [word_indicies]}
     compute_word_hashes(words, word_to_hash, hash_to_words)
+    print(word_to_hash)
+    print(hash_to_words)
     typos = False
 
     for word in words:
@@ -86,7 +88,7 @@ def typo(words: List[str]) -> None:
 
 def main():
     global X, X_INV
-    X_INV = pow(X, -1, MOD)
+    #X_INV = pow(X, -1, MOD)
 
     input_lines = sys.stdin.read().splitlines()
     words = input_lines[1:]
