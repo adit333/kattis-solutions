@@ -35,11 +35,12 @@ void compute_word_hashes(vector<string>& words, unordered_map<string, ll>& word_
     }
 }
 
-bool is_present(ll hash_without_letter, string word_without_letter,
+bool is_present(ll hash_without_letter, int i, string &word,
         unordered_map<ll, vector<ll>>& hash_to_words, vector<string>& words) {
     if (hash_to_words.find(hash_without_letter) == hash_to_words.end())
         return false;
     
+    string word_without_letter = word.substr(0, i) + word.substr(i+1, word.length());
     for (int word_index : hash_to_words[hash_without_letter]) {
         if (word_without_letter == words[word_index])
             return true;
@@ -74,8 +75,7 @@ void typo(vector<string>& words) {
             hash_without_letter += partial_hash;
             hash_without_letter %= MOD;
 
-            string word_without_letter = word.substr(0, i) + word.substr(i+1, word.length());
-            if (is_present(hash_without_letter, word_without_letter, hash_to_words, words)) {
+            if (is_present(hash_without_letter, i, word, hash_to_words, words)) {
                 cout << word << endl;
                 typos = true;
                 break;
