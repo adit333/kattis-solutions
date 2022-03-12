@@ -14,7 +14,6 @@ Approach:
 """
 
 import sys
-import dataclasses
 from typing import List
 import math
 
@@ -22,11 +21,11 @@ import math
 EPS = 10**-8
 
 
-@dataclasses.dataclass
 class equation_of_line_3d:
-    start: List[int]        # starting point of the circle
-    gradient: List[int]     # direction the circle is moving in
-    radius: int             # radius of the circle
+    def __init__(self, s, g, r):
+        self.start = s       # starting point of the circle
+        self.gradient = g   # direction the circle is moving in
+        self.radius = r             # radius of the circle
 
 
 def dot_product(u: List[int], v: List[int]) -> int:
