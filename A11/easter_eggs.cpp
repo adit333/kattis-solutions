@@ -74,18 +74,10 @@ ld get_dist(pair<ld,ld> p1, pair<ld,ld> p2) {
 bool is_possible_to_place_red_and_blue_eggs_dist_apart(int num_of_eggs_to_hide, int num_of_blue_bushes, int num_of_red_bushes,
         vector<vector<ld>> dist_btw_points, ld dist) {
     vvi bipartite_graph(num_of_blue_bushes);
-    unordered_set<int> right_hand_set;
-    for (int i = 0; i < num_of_blue_bushes; ++i) {
-        for (int j = 0; j < num_of_red_bushes; ++j) {
+    for (int i = 0; i < num_of_blue_bushes; ++i)
+        for (int j = 0; j < num_of_red_bushes; ++j)
             if (dist_btw_points[i][j] < dist) {
                 bipartite_graph[i].push_back(j);
-                right_hand_set.insert(j);
-            }
-        }
-    }
-
-    // required for the KACTL matching algorithm
-    vi btoa(right_hand_set.size(), -1);
 
     int size_of_mathcing = bipartite_graph_matching(bipartite_graph, num_of_blue_bushes, num_of_red_bushes);
     int size_of_max_independent_set = num_of_blue_bushes + num_of_red_bushes - size_of_mathcing;
