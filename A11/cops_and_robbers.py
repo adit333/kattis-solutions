@@ -16,7 +16,6 @@ from copy import deepcopy
 from typing import Tuple
 
 INF = float('inf')
-MAX = 10**10
 
 
 class MaxFlow:
@@ -217,9 +216,9 @@ def cops_and_robbers(n, m, board, barricade_costs) -> None:
             id1, id2 = get_vertex_ids(i, j, n, m)   # we split a vertex into two
 
             if board[i][j] == 'B':
-                mf.add_edge(s, id2, MAX)
+                mf.add_edge(s, id2, INF)    # s is connected only to the B vertex
             elif board[i][j] == '.' :
-                mf.add_edge(id1, id2, MAX)
+                mf.add_edge(id1, id2, INF)
             else:
                 cost = barricade_costs[ord(board[i][j]) - ord('a')]
                 mf.add_edge(id1, id2, cost)
@@ -230,12 +229,12 @@ def cops_and_robbers(n, m, board, barricade_costs) -> None:
 
                 if is_coord_in_board(x_new, y_new, n, m):
                     adjacent_neighbor_id, _ = get_vertex_ids(x_new, y_new, n, m)
-                    mf.add_edge(id2, adjacent_neighbor_id, MAX)
+                    mf.add_edge(id2, adjacent_neighbor_id, INF)
                 else:
-                    mf.add_edge(id2, t, MAX)
+                    mf.add_edge(id2, t, INF)
     
     max_flow = mf.dinic(s, t)
-    if max_flow >= MAX:
+    if max_flow >= INF:
         print(-1)
     else:
         print(max_flow)
