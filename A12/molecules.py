@@ -38,7 +38,7 @@ def GaussianElimination(N, mat):
 def molecules(num_of_atoms: int, num_of_connections: int,
         coordinates: List[List[int]], known: List[bool],
         atom_connections: List[List[int]], num_of_atom_connections: List[List[int]]) -> None:
-    A_x = [[0 for _ in range(num_of_atoms+1)] for _ in range(num_of_atoms)]  # Augmented matrix for y
+    A_x = [[0 for _ in range(num_of_atoms+1)] for _ in range(num_of_atoms)]  # Augmented matrix for x
     A_y = [[0 for _ in range(num_of_atoms+1)] for _ in range(num_of_atoms)]  # Augmented matrix for y
 
     for i, coord in enumerate(coordinates):
