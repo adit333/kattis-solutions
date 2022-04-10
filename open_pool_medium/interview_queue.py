@@ -9,32 +9,50 @@ def interview_queue(num_of_candidates: int, candidate_ratings: List[int]) -> Non
     results = []
 
     someone_left = True    
-    while someone_left:
-        left = [False] * len(candidate_ratings)
-        for i in range(len(candidate_ratings)):
-            if i != 0:
-                if candidate_ratings[i-1] > candidate_ratings[i]:
-                    left[i] = True
-            if i != len(candidate_ratings)-1:
-                if candidate_ratings[i+1] > candidate_ratings[i]:
-                    left[i] = True
 
+    prev_rating = -1
+    next_idx = -1
+    while someone_left:
+        current = 0
         someone_left = False
-        j = 0
         candidates_who_left = []
-        for pos in range(len(left)):
-            if left[pos]:
-                candidates_who_left.append(candidate_ratings[pos-j])
-                candidate_ratings.pop(pos-j)
-                j += 1
-                someone_left = True
+        while current < len(candidate_ratings):
+            if candidate_ratings[current] != -1:
+                next_idx = current + 1
+                while next_idx < num_of_candidates and candidate_ratings[next_idx] == -1:
+                    next_idx += 1
+
+                if prev_rating > candidate_ratings[current]:
+                    prev_rating = candidate_ratings[current]
+                    candidates_who_left.append(candidate_ratings[current])
+                    candidate_ratings[current] = -1
+                    someone_left = True
+                else:
+                    prev_rating = candidate_ratings[current]
+                
+                if candidate_ratings[current] != -1:    # Killed in prev check, so no need to check.
+                    if next_idx < num_of_candidates and candidate_ratings[current] < candidate_ratings[next_idx]:
+                        prev_rating = candidate_ratings[current]
+                        candidates_who_left.append(candidate_ratings[current])
+                        candidate_ratings[current] = -1
+                        someone_left = True
+
+                current = next_idx
+            
+            else:
+                current += 1
+
         if candidates_who_left:
             results.append(candidates_who_left)
 
     print(len(results))
     for l in results:
         print(*l)
-    print(*candidate_ratings)
+    left = []
+    for c in candidate_ratings:
+        if c != -1:
+            left.append(c)
+    print(*left)
 
 
 def main():
