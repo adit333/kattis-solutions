@@ -1,10 +1,9 @@
-/* This class computes the LU factorization of an n * n square matrix
-*/
+#ifndef LU_FACTORIZER_H
+#define LU_FACTORIZER_H
 
 #include <bits/stdc++.h>
 
 using namespace std;
-
 
 class LUFactorizer {
     public:
@@ -42,31 +41,6 @@ class LUFactorizer {
         return det;
     }
 
-    bool forward_substitution(vector<vector<double>> &A, vector<double> &b, vector<double> &y) {
-        int n = A.size();
-        for (int j = 0; j < n; ++j) {       // Loop over the columns
-            // Compute the solution component.
-            // This is always divided by 1 as diagnols of L are 1
-            y[j] = b[j];
-
-            for (int i = j+1; i < n; ++i)   // Update the RHS
-                b[i] = b[i] - A[i][j] * y[j];
-        }
-        return true;
-    }
-
-    bool backward_substitution(vector<vector<double>> &A, vector<double> &y, vector<double> &x) {
-        int n = A.size();
-
-        for (int j = n-1; j >=0; --j) {     // Loop backward over columns
-            x[j] = y[j] / A[j][j];          // Compute the solution component
-
-            for (int i = 0; i < j; ++i)   // Update RHS
-                y[i] = y[i] - A[i][j] * x[j];
-        }
-        return true;
-    }
-
     void print_lu(vector<vector<double>> &A) {
         int n = A.size();
 
@@ -102,17 +76,32 @@ class LUFactorizer {
             cout << x[i] << "  ";
         cout << endl;
     }
+
+    private:
+    bool forward_substitution(vector<vector<double>> &A, vector<double> &b, vector<double> &y) {
+        int n = A.size();
+        for (int j = 0; j < n; ++j) {       // Loop over the columns
+            // Compute the solution component.
+            // This is always divided by 1 as diagnols of L are 1
+            y[j] = b[j];
+
+            for (int i = j+1; i < n; ++i)   // Update the RHS
+                b[i] = b[i] - A[i][j] * y[j];
+        }
+        return true;
+    }
+
+    bool backward_substitution(vector<vector<double>> &A, vector<double> &y, vector<double> &x) {
+        int n = A.size();
+
+        for (int j = n-1; j >=0; --j) {     // Loop backward over columns
+            x[j] = y[j] / A[j][j];          // Compute the solution component
+
+            for (int i = 0; i < j; ++i)   // Update RHS
+                y[i] = y[i] - A[i][j] * x[j];
+        }
+        return true;
+    }
 };
 
-int main() {
-    //vector<vector<double>> A = {{1, 2, 2}, {4, 4, 2}, {4, 6, 4}};
-    vector<double> b = {3, 6, 10};
-    vector<double> x(3);
-    vector<vector<double>> A = {{4, 4}, {12, 7}};
-    LUFactorizer luf;
-    luf.fit(A);
-    //luf.print_lu(A);
-    cout << luf.determinant(A) << endl;
-    // luf.solve_for_b(A, b, x);
-    // luf.print_vector(x);
-}
+#endif  // LU_FACTORIZER_H
