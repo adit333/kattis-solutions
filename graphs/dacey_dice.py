@@ -111,18 +111,6 @@ class Dice:
             return Dice(self.row-1, self.col, self.BOTTOM)
 
 
-# def dfs(start: Dice, end: Tuple[int, int], num_sides: int,
-#         board: List[str], visited: Set) -> bool:
-#     row, col = start.row, start.col
-#     visited.add((row, col, start.five_direction))
-#     reached_goal = False
-#     for neighbor in start.get_neighbors(num_sides, board):
-#         if (neighbor.row, neighbor.col) == end and neighbor.five_direction == Dice.BOTTOM:
-#             return True
-#         if (neighbor.row, neighbor.col, neighbor.five_direction) not in visited:
-#             reached_goal |= dfs(neighbor, end, num_sides, board, visited)
-#     return reached_goal
-
 def dfs(start: Dice, end: Tuple[int, int], num_sides: int,
         board: List[str], visited: List[List[bool]]) -> bool:
     stack = deque()
