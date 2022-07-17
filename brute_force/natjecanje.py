@@ -8,10 +8,13 @@ from typing import List, Set
 def natjecanje(n: int, reserve_kayaks: Set[int], damaged_kayaks: Set[int]) -> None:
     for i in range(1, n+1):
         if i in damaged_kayaks:
-            if i > 1 and i - 1 in reserve_kayaks:
+            if i in reserve_kayaks:                     # Do I have a reserve?
+                damaged_kayaks.remove(i)
+                reserve_kayaks.remove(i)
+            elif i > 1 and i - 1 in reserve_kayaks:     # Does my left neighbour have a reserve?
                 damaged_kayaks.remove(i)
                 reserve_kayaks.remove(i-1)
-            elif i < n and i + 1 in reserve_kayaks:
+            elif i < n and i + 1 in reserve_kayaks:     # Does my right neighbour have a reserve?
                 damaged_kayaks.remove(i)
                 reserve_kayaks.remove(i+1)
     print(len(damaged_kayaks))
